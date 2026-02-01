@@ -45,9 +45,6 @@ importers:
       '@types/express':
         specifier: ^5.0.3
         version: 5.0.6
-      '@types/express-validator':
-        specifier: ^2.20.33
-        version: 2.20.33
       '@types/mongoose':
         specifier: ^5.11.96
         version: 5.11.97
@@ -275,9 +272,6 @@ packages:
 
   '@types/express-serve-static-core@5.1.1':
     resolution: {integrity: sha512-v4zIMr/cX7/d2BpAEX3KNKL/JrT1s43s96lLvvdTmza1oEvDudCqK9aF/djc/SWgy8Yh0h30TZx5VpzqFCxk5A==}
-
-  '@types/express-validator@2.20.33':
-    resolution: {integrity: sha512-dAlxnuNhKkM/Xq2148NySrnutOSeK8Xk6rpDdDrNT5akAKqFbtLmMKENaMYYh4xWcSqtSWc5l+TLxnZosa9p/g==}
 
   '@types/express@5.0.6':
     resolution: {integrity: sha512-sKYVuV7Sv9fbPIt/442koC7+IIwK5olP1KWeD88e/idgoJqDm3JV/YUiPwkoKK92ylff2MGxSz1CSjsXelx0YA==}
@@ -1136,10 +1130,6 @@ snapshots:
       '@types/qs': 6.14.0
       '@types/range-parser': 1.2.7
       '@types/send': 1.2.1
-
-  '@types/express-validator@2.20.33':
-    dependencies:
-      '@types/express': 5.0.6
 
   '@types/express@5.0.6':
     dependencies:
