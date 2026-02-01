@@ -11,7 +11,7 @@ export const initializeConnection = async () => {
   try {
     await mongoose
       .connect(DB_URL!,{
-        dbName:"worthit-db"
+        dbName:"v2c-db"
       })
       .then(() => {
         logger.info(`Connected Successfully`);
