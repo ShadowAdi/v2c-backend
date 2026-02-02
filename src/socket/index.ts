@@ -1,5 +1,6 @@
 import { Server } from "http";
 import { Server as SocketIOServer } from "socket.io";
+import { registerSocketHandlers } from "./handlers";
 
 export function initSocket(server: Server) {
     const io = new SocketIOServer(server, {
@@ -20,6 +21,14 @@ export function initSocket(server: Server) {
         socket.onAny((event, ...args) => {
             console.log(" Chat Event received:", event);
         });
+
+
+        try {
+            registerSocketHandlers(io, socket);
+        } catch (error) {
+            console.error("Error registering socket handlers:", error);
+            socket.emit("error", { message: "Failed to initialize socket handlers" });
+        }
 
         socket.on("disconnect", (reason) => {
             console.log("❌ Chat Socket disconnected:", socket.id, "Reason:", reason);
