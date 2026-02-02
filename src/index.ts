@@ -4,8 +4,18 @@ import { initializeConnection } from "./db/initialize.connection";
 import { PORT } from "./config/dotenv";
 import { logger } from "./config/logger";
 import { shutdown } from "./utils/graceful-shutdown";
+import { Server } from "socket.io";
 
 const server = createServer(app)
+
+const io = new Server(server)
+
+io.on("connection", (socket) => {
+    console.log("A User Connected")
+    socket.on("disconnect", () => {
+        console.log("User Disconnected")
+    })
+})
 
 const startServer = async () => {
     await initializeConnection()
