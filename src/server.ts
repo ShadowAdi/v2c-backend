@@ -2,7 +2,6 @@ import express, { Express } from "express";
 import helmet from "helmet";
 import { CorsConfig } from "./config/cors";
 import { CustomErrorHandler } from "./middlewares/custom-error.middleware";
-import roomRouter from "./routes/room.router";
 
 const app: Express = express()
 
@@ -26,8 +25,6 @@ app.get('/', (_req, res) => {
         }
     });
 });
-
-app.use('/api/rooms', roomRouter);
 
 app.use(CustomErrorHandler)
 
