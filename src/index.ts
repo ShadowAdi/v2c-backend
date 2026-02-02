@@ -21,7 +21,7 @@ io.on("connection", (s) => {
 
     s.on("chat-message", (msg) => {
         console.log(`message value `, msg)
-        io.emit("chat-message", msg)
+        io.emit("get-messages", msg)
     })
 
     s.on("disconnect", () => {
