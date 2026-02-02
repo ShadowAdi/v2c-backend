@@ -27,7 +27,6 @@ app.get('/', (_req, res) => {
     });
 });
 
-// Room routes
 app.use('/api/rooms', roomRouter);
 
 app.use(CustomErrorHandler)
