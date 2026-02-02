@@ -4,9 +4,30 @@ import { initializeConnection } from "./db/initialize.connection";
 import { PORT } from "./config/dotenv";
 import { logger } from "./config/logger";
 import { shutdown } from "./utils/graceful-shutdown";
+import { Server } from "socket.io";
 
 const server = createServer(app)
 
+const io = new Server(server, {
+    cors: {
+        origin: "*",
+        methods: ["GET", "POST"],
+    }
+})
+
+
+io.on("connection", (s) => {
+    console.log(`A User connected: ${s.id}`)
+
+    s.on("chat-message", (msg) => {
+        console.log(`message value `, msg)
+        io.emit("chat-message", msg)
+    })
+
+    s.on("disconnect", () => {
+        console.log(`Someone disconnected`)
+    })
+})
 
 const startServer = async () => {
     await initializeConnection()
