@@ -16,7 +16,7 @@ export function initSocket(server: Server) {
     })
 
     io.on("connection", (socket) => {
-        console.log("🔌 Chat Socket connected:", socket.id);
+        console.log(" Chat Socket connected:", socket.id);
 
         socket.onAny((event, ...args) => {
             console.log(" Chat Event received:", event);
