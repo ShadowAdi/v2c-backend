@@ -4,18 +4,20 @@ import { initializeConnection } from "./db/initialize.connection";
 import { PORT } from "./config/dotenv";
 import { logger } from "./config/logger";
 import { shutdown } from "./utils/graceful-shutdown";
-import { Server } from "socket.io";
+import { initSocket } from "./socket";
+
+let meetSocket:any
 
 const server = createServer(app)
 
-const io = new Server(server)
+try {
+  meetSocket = initSocket(server);
+  console.log(' Chat Socket.IO initialized on /socket.io/meet/');
+} catch (error) {
+  console.error('Failed to initialize meet socket:', error);
+  process.exit(1);
+}
 
-io.on("connection", (socket) => {
-    console.log("A User Connected")
-    socket.on("disconnect", () => {
-        console.log("User Disconnected")
-    })
-})
 
 const startServer = async () => {
     await initializeConnection()
