@@ -40,11 +40,11 @@ io.on("connection", (s) => {
         io.emit("get-messages", msg)
     })
 
-    s.on("join-room", ({ meetId,
-        roomId }) => {
-        console.log("Join room ", meetId, " room id ", roomId)
-        s.join(roomId)
-        s.to(roomId).emit("user-joined", { meetId })
+    s.on("join-room", ({ userId,
+        meetId }) => {
+        console.log("Join room meet id ", meetId, " user id ", userId)
+        s.join(meetId)
+        s.to(meetId).emit("user-joined", { userId })
     })
 
     s.on("disconnect", () => {
