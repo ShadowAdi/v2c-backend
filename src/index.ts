@@ -24,6 +24,13 @@ io.on("connection", (s) => {
         io.emit("get-messages", msg)
     })
 
+    s.on("join-room", ({ meetId,
+        roomId }) => {
+        console.log("Join room ", meetId, " room id ", roomId)
+        s.join(roomId)
+        s.to(roomId).emit("user-joined", { meetId })
+    })
+
     s.on("disconnect", () => {
         console.log(`Someone disconnected`)
     })
