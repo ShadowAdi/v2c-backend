@@ -1,12 +1,28 @@
 import { createServer } from "http";
 import app from "./server";
 import { initializeConnection } from "./db/initialize.connection";
-import { PORT } from "./config/dotenv";
+import { PEER_PORT, PORT } from "./config/dotenv";
 import { logger } from "./config/logger";
 import { shutdown } from "./utils/graceful-shutdown";
 import { Server } from "socket.io";
+import { PeerServer } from "peer";
 
 const server = createServer(app)
+
+const peerServer = PeerServer({
+    port: Number(PEER_PORT),
+    path: '/peerjs',
+    allow_discovery: true
+});
+
+peerServer.on('connection', (client) => {
+    console.log('✓ PeerJS client connected:', client.getId());
+});
+
+peerServer.on('disconnect', (client) => {
+    console.log('✗ PeerJS client disconnected:', client.getId());
+});
+
 
 const io = new Server(server, {
     cors: {
